@@ -234,6 +234,7 @@ game.onUpdateInterval(1000, function () {
     if (character.x >= 1000) {
         frontCam.x += -1000
         character.x += -1000
+        Goose.x += -1000
         for (let value2 of enemyList) {
             value2.x += -1000
         }
