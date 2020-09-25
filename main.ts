@@ -16,6 +16,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
 	
 })
+let newEnemy: Sprite = null
 let lane = 0
 let speed = 96
 lane = 2
@@ -61,7 +62,8 @@ frontCam.setPosition(60, 60)
 frontCam.setVelocity(speed, 0)
 scene.cameraFollowSprite(frontCam)
 tiles.setTilemap(tilemap`level_1`)
-let enemyList1 = [sprites.create(img`
+let enemyList1 = [
+sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -78,7 +80,8 @@ let enemyList1 = [sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Enemy), sprites.create(img`
+    `, SpriteKind.Enemy),
+sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -95,7 +98,8 @@ let enemyList1 = [sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Enemy), sprites.create(img`
+    `, SpriteKind.Enemy),
+sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -112,20 +116,23 @@ let enemyList1 = [sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Enemy)]
+    `, SpriteKind.Enemy)
+]
 for (let value of enemyList1) {
     value.setPosition(0, 200)
 }
-let maxObstacleDistance = 280
-game.onUpdateInterval(5000, function () {
-    enemyList1.push(enemyList1[randint(0, 2)])
-    enemyList1[enemyList1.length - 1].setPosition(0, 200)
-})
+let maxObstacleDistance = 100
+console.log(enemyList1.length)
 game.onUpdateInterval(1000, function () {
     if (character.x >= 1000) {
         character.setPosition(50, 30 * lane)
         frontCam.setPosition(90, 60)
     }
+})
+game.onUpdateInterval(1000, function () {
+    newEnemy = enemyList1[randint(0, 2)]
+    newEnemy.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
+    console.log(enemyList1.length)
 })
 forever(function () {
     character.y = 30 * lane
