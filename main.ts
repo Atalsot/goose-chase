@@ -89,7 +89,9 @@ let Goose = sprites.create(img`
     . . . f f 2 f . . f 2 f . . . . 
     . . . . f 2 f . . f 2 f . . . . 
     . . . . f f f . . f f f . . . . 
-    `, SpriteKind.Player)
+    `, SpriteKind.Enemy)
+Goose.setPosition(0, 60)
+Goose.setVelocity(speed, 0)
 scene.cameraFollowSprite(frontCam)
 tiles.setTilemap(tilemap`level_1`)
 let enemyList = [sprites.create(img`
@@ -244,12 +246,14 @@ game.onUpdateInterval(1000, function () {
     speed += 1.5
     character.setVelocity(speed, 0)
     frontCam.setVelocity(speed, 0)
+    Goose.setVelocity(speed, 0)
     if (maxObstacleDistance > 100) {
         maxObstacleDistance += -3
     }
 })
 forever(function () {
     character.y = 32 * lane - 8
+    Goose.y = 32 * lane - 8
 })
 forever(function () {
     for (let value22 of enemyList) {
