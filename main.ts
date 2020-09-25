@@ -72,6 +72,24 @@ let frontCam = sprites.create(img`
     `, SpriteKind.Camera)
 frontCam.setPosition(60, 60)
 frontCam.setVelocity(speed, 0)
+let Goose = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . f f f f . . . . 
+    . . . . . . . . . . . f f . . . 
+    . . . . . . . . . . . . f . . . 
+    . . . . . . . . . . . . . f . . 
+    . . . . . . . . . f f f f . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
 scene.cameraFollowSprite(frontCam)
 tiles.setTilemap(tilemap`level_1`)
 let enemyList = [sprites.create(img`
@@ -92,13 +110,13 @@ let enemyList = [sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Enemy), sprites.create(img`
-    . . . . . . . . . f . . . . . . 
-    . . . . . . . . f e f . . . . . 
-    . . . . f f f . f e e f . . . . 
-    . . . . f e f f f f e f . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . f f f . . . . . . . 
+    . . . . . f e e e f f . . . . . 
     . . . . f e e e e e e f . . . . 
-    . . . f e e f e e e f f . . . . 
-    . . . f e e f f f f f f . . . . 
     . . . f e e e e e e e e f . . . 
     . . . f e e e e e e e e f . . . 
     . . . f f f f f f e e e e f . . 
@@ -214,8 +232,8 @@ game.onUpdateInterval(1000, function () {
     if (character.x >= 1000) {
         frontCam.x += -1000
         character.x += -1000
-        for (let value of enemyList) {
-            value.x += -1000
+        for (let value2 of enemyList) {
+            value2.x += -1000
         }
         papers.x += -1000
         gooseWall.x += -1000
@@ -234,9 +252,9 @@ forever(function () {
     character.y = 30 * lane
 })
 forever(function () {
-    for (let value2 of enemyList) {
-        if (value2.x <= character.x - 40 || value2.x >= character.x + 400) {
-            value2.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
+    for (let value22 of enemyList) {
+        if (value22.x <= character.x - 40 || value22.x >= character.x + 400) {
+            value22.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
         }
     }
     if (papers.x <= character.x - 40 || papers.x >= character.x + 600) {
