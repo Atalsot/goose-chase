@@ -7,6 +7,12 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         lane = 1
     }
 })
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    lane += -0.5
+})
+controller.A.onEvent(ControllerButtonEvent.Released, function () {
+    lane += 0.5
+})
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     lane += 1
     if (lane > 3) {
