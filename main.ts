@@ -19,7 +19,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let lane = 0
 let speed = 96
 lane = 2
-let maxObstacleDistance = 1800
 let character = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -117,7 +116,7 @@ let enemyList1 = [sprites.create(img`
 for (let value of enemyList1) {
     value.setPosition(0, 200)
 }
-maxObstacleDistance = 280
+let maxObstacleDistance = 280
 game.onUpdateInterval(5000, function () {
     enemyList1.push(enemyList1[randint(0, 2)])
     enemyList1[enemyList1.length - 1].setPosition(0, 200)
