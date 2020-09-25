@@ -21,11 +21,13 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(50)
+    papers.setFlag(SpriteFlag.Invisible, true)
     pause(205)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     game.over(false)
 })
+let papers: Sprite = null
 let lane = 0
 let speed = 96
 lane = 2
@@ -144,7 +146,7 @@ let enemyList = [sprites.create(img`
 for (let value of enemyList) {
     value.setPosition(0, 200)
 }
-let papers = sprites.create(img`
+papers = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . f f f f f . . . . 
     . . . . f f f d d d d d f f . . 
@@ -212,11 +214,16 @@ game.onUpdateInterval(1000, function () {
     if (character.x >= 1000) {
         frontCam.x += -1000
         character.x += -1000
+        for (let value of enemyList) {
+            value.x += -1000
+        }
+        papers.x += -1000
+        gooseWall.x += -1000
     }
 })
 game.onUpdateInterval(1000, function () {
     info.changeScoreBy(5)
-    speed += 2
+    speed += 1.5
     character.setVelocity(speed, 0)
     frontCam.setVelocity(speed, 0)
     if (maxObstacleDistance > 100) {
@@ -233,6 +240,7 @@ forever(function () {
         }
     }
     if (papers.x <= character.x - 40 || papers.x >= character.x + 600) {
+        papers.setFlag(SpriteFlag.Invisible, false)
         papers.setPosition(character.x + (120 + randint(60, 1.5 * maxObstacleDistance)), randint(1, 3) * 30)
     }
     if (gooseWall.x <= character.x - 40 || gooseWall.x >= character.x + 600) {
