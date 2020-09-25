@@ -210,8 +210,8 @@ let gooseWall = sprites.create(img`
 gooseWall.setPosition(0, 200)
 game.onUpdateInterval(1000, function () {
     if (character.x >= 1000) {
-        character.setPosition(50, 30 * lane)
-        frontCam.setPosition(90, 60)
+        frontCam.x += -1000
+        character.x += -1000
     }
 })
 game.onUpdateInterval(1000, function () {
