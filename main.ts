@@ -31,22 +31,22 @@ let speed = 96
 lane = 2
 let maxObstacleDistance = 280
 let character = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . 3 3 3 3 3 3 3 3 . . . . 
-    . . . . 3 3 3 3 3 3 3 3 . . . . 
-    . . . . 3 3 3 3 3 3 3 3 . . . . 
-    . . . . 3 3 3 3 3 3 3 3 . . . . 
-    . . . . 3 3 3 3 3 3 3 3 . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
+    . . . . . . . e e e e . . . . . 
+    . . . . . . e e e e e e . . . . 
+    . . . . . 5 5 5 5 5 5 5 5 . . . 
+    . . . . 5 e e e d d f d . . . . 
+    . . . 5 . e d e d d f d . . . . 
+    . . . . . e d d d d d d d . . . 
+    . . . . . . e d d d d d . . . . 
+    . . . . . . . . d d d . . . . . 
+    . . . . . f 5 5 f f 5 f . . . . 
+    . . . . f f 5 5 5 5 5 f f . . . 
+    . . . . f f 5 5 5 5 5 f f . . . 
+    . . . . d d f f f f f d d . . . 
+    . . . . . 5 5 5 5 5 5 5 . . . . 
+    . . . . . 5 5 5 . 5 5 5 . . . . 
+    . . . . 5 5 5 . . . 5 5 5 . . . 
+    . . . f f f f . . . f f f f . . 
     `, SpriteKind.Player)
 character.setPosition(20, 60)
 character.setVelocity(speed, 0)
@@ -77,34 +77,34 @@ let enemyList = [sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    . . . . . . 2 2 2 . . . . . . . 
-    . . . . . 2 2 . 2 2 . . . . . . 
-    . . . . 2 2 . . . 2 2 . . . . . 
-    . . . . 2 . . . . . 2 . . . . . 
-    . . . . 2 . . . . . 2 . . . . . 
-    . . . . 2 . . . . 2 2 . . . . . 
-    . . . . 2 2 . . . 2 . . . . . . 
-    . . . . . 2 2 2 2 . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . e . . . e e . . . e . . . 
+    . . e e e e e e e e e e e e . . 
+    . . . e . . . e e . . . e . . . 
+    . . . e . . . e e . . . e . . . 
+    . . e e e e e e e e e e e e . . 
+    . . . e . . . e e . . . e . . . 
+    . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Enemy), sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . e e e e . . . . . . . 
-    . . . . e e e e e e . . . . . . 
-    . . . . e e e e e e e . . . . . 
-    . . . e e e 7 7 e e e e . . . . 
-    . . . e e e 7 7 e e e e . . . . 
-    . . . e e e 7 7 e e e . . . . . 
-    . . . e e e e e e e e . . . . . 
-    . . . . e e e e e e . . . . . . 
-    . . . . . e e e e . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . f . . . . . . 
+    . . . . . . . . f e f . . . . . 
+    . . . . f f f . f e e f . . . . 
+    . . . . f e f f f f e f . . . . 
+    . . . . f e e e e e e f . . . . 
+    . . . f e e f e e e f f . . . . 
+    . . . f e e f f f f f f . . . . 
+    . . . f e e e e e e e e f . . . 
+    . . . f e e e e e e e e f . . . 
+    . . . f f f f f f e e e e f . . 
+    . . f e e e e e e e e e e f . . 
+    . . f e e e e e e e e e e f . . 
+    . . f e e e e e e e e e e f . . 
+    . . f e e e e e e e e e e f . . 
+    . . f f f f f f f f f f f f . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Enemy), sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -183,9 +183,9 @@ forever(function () {
     character.y = 30 * lane
 })
 forever(function () {
-    for (let value of enemyList) {
-        if (value.x <= character.x - 40 || value.x >= character.x + 400) {
-            value.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
+    for (let value2 of enemyList) {
+        if (value2.x <= character.x - 40 || value2.x >= character.x + 400) {
+            value2.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
         }
     }
     if (papers.x <= character.x - 40 || papers.x >= character.x + 600) {
