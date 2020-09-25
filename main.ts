@@ -21,7 +21,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(50)
-    pause(200)
+    pause(205)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     game.over(false)
