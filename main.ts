@@ -249,19 +249,19 @@ game.onUpdateInterval(1000, function () {
     }
 })
 forever(function () {
-    character.y = 30 * lane
+    character.y = 32 * lane - 8
 })
 forever(function () {
     for (let value22 of enemyList) {
         if (value22.x <= character.x - 40 || value22.x >= character.x + 400) {
-            value22.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
+            value22.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 32 - 8)
         }
     }
     if (papers.x <= character.x - 40 || papers.x >= character.x + 600) {
         papers.setFlag(SpriteFlag.Invisible, false)
-        papers.setPosition(character.x + (120 + randint(60, 1.5 * maxObstacleDistance)), randint(1, 3) * 30)
+        papers.setPosition(character.x + (120 + randint(60, 1.5 * maxObstacleDistance)), randint(1, 3) * 32 - 8)
     }
     if (gooseWall.x <= character.x - 40 || gooseWall.x >= character.x + 600) {
-        gooseWall.setPosition(character.x + (120 + randint(60, 1.5 * maxObstacleDistance)), randint(1, 3) * 30)
+        gooseWall.setPosition(character.x + (120 + randint(60, 1.5 * maxObstacleDistance)), randint(1, 3) * 32 - 8)
     }
 })
