@@ -13,8 +13,12 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         lane = 3
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(50)
+    pause(200)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-	
+    game.over(false)
 })
 let lane = 0
 let speed = 96
@@ -134,28 +138,39 @@ let enemyList = [sprites.create(img`
 for (let value of enemyList) {
     value.setPosition(0, 200)
 }
-let mySprite = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . 5 5 5 5 . . . . . . . 
-    . . . . 5 . . . . 5 . . . . . . 
-    . . . . 5 . 5 5 . 5 . . . . . . 
-    . . . . 5 . 5 5 . 5 . . . . . . 
-    . . . . 5 . . . . 5 . . . . . . 
-    . . . . . 5 5 5 5 . . . . . . . 
+let papers = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . f f f f . . . . . . 
+    . . . . . f 5 5 5 5 f . . . . . 
+    . . . . f 5 . . . . 5 f . . . . 
+    . . . . f 5 . 5 5 . 5 f . . . . 
+    . . . . f 5 . 5 5 . 5 f . . . . 
+    . . . . f 5 . . . . 5 f . . . . 
+    . . . . . f 5 5 5 5 f . . . . . 
+    . . . . . . f f f f . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Food)
+papers.setPosition(0, 200)
 game.onUpdateInterval(1000, function () {
     if (character.x >= 1000) {
         character.setPosition(50, 30 * lane)
         frontCam.setPosition(90, 60)
+    }
+})
+game.onUpdateInterval(1000, function () {
+    info.changeScoreBy(5)
+    speed += 2
+    character.setVelocity(speed, 0)
+    frontCam.setVelocity(speed, 0)
+    if (maxObstacleDistance > 100) {
+        maxObstacleDistance += -2
+        console.log(maxObstacleDistance)
     }
 })
 forever(function () {
@@ -166,5 +181,8 @@ forever(function () {
         if (value.x <= character.x - 40 || value.x >= character.x + 400) {
             value.setPosition(character.x + (120 + randint(0, maxObstacleDistance)), randint(1, 3) * 30)
         }
+    }
+    if (papers.x <= character.x - 40 || papers.x >= character.x + 600) {
+        papers.setPosition(character.x + (120 + randint(60, 1.5 * maxObstacleDistance)), randint(1, 3) * 30)
     }
 })
