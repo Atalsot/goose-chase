@@ -2,7 +2,8 @@
     "name": "Goose Chase",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "corgio": "*"
     },
     "files": [
         "main.blocks",
